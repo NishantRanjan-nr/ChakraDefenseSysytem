@@ -1,0 +1,316 @@
+
+:root{
+  --muted: #9fb3d1;
+  --bg: #0b1224;
+  --card-bg: rgba(255,255,255,0.04);
+  --card-glass: rgba(255,255,255,0.03);
+  --accent: #2563eb;
+  --danger: #dc2626;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #0b1224;
+  color: #e6eef8;
+}
+
+.container { max-width: 1100px; margin: auto; padding: 24px; }
+
+.site-header {
+  border-bottom: none;
+  padding: 14px 0; /* smaller header vertical padding */
+  background: linear-gradient(90deg, rgba(2,6,23,0.97), rgba(3,8,34,0.94));
+  box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+  /* Make header scroll with the page (not sticky) */
+  position: static;
+  min-height: 72px; /* reduced min-height for a more compact header */
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+
+.brand { display: flex; gap: 20px; align-items: center; }
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(180deg,#60a5fa,#2563eb); /* fallback while image loads */
+  box-shadow: 0 6px 18px rgba(37,99,235,0.12);
+}
+
+.site-logo{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Make title slightly smaller and ensure vertical centering next to logo */
+.brand > div { display:flex; flex-direction:column; justify-content:center; }
+.site-title { margin: 0; font-size: 20px; font-weight: 700; color: #ffffff; line-height:1.05; }
+.tag { font-size: 13px; color: #d7ecff; margin-top: 4px; }
+
+/* Prototype badge */
+.meta{ margin-top:6px; }
+.badge{
+  display:inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-weight:600;
+  font-size:12px;
+  padding:4px 8px;
+  border-radius:8px;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.12);
+}
+.brand .meta { margin-top: 6px; color: rgba(255,255,255,0.85); }
+
+/* Page-specific modern styles */
+.user-page .hero, .authority-page .hero{ padding: 36px 0; border-radius: 14px; }
+.user-hero{ background: linear-gradient(180deg, rgba(37,99,235,0.12), rgba(2,6,23,0.08)); padding: 32px; border-radius: 14px; box-shadow: 0 8px 30px rgba(2,6,23,0.6); }
+.user-page .card, .authority-page .card, .authority-page .dash-card{ background: var(--card-bg); border-radius: var(--radius); box-shadow: 0 8px 30px rgba(2,6,23,0.45); border: 1px solid rgba(255,255,255,0.04); }
+
+.authority-page .header-inner{ gap: 18px; }
+.authority-page .brand .logo, .user-page .brand .logo { font-size: 36px; }
+.authority-page .dashboard-grid{ grid-template-columns: 1fr 1fr; }
+.authority-page .dash-card{ padding: 18px; transition: transform .18s ease, box-shadow .18s ease; }
+.authority-page .dash-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.6); }
+
+/* User page tweaks */
+.user-page .site-header{ background: linear-gradient(90deg, rgba(2,6,23,0.8), rgba(3,7,34,0.6)); }
+.user-page .hero{ background: linear-gradient(90deg, rgba(2,6,23,0.6), rgba(6,15,40,0.4)); color: #f8fbff; }
+.user-page .hero .primary{ background: linear-gradient(90deg,var(--accent),#1e40af); box-shadow: 0 8px 20px rgba(37,99,235,0.18); }
+.user-page .muted{ color: var(--muted); }
+
+/* Buttons */
+.primary{ background: linear-gradient(180deg,var(--accent),#1e40af); color: white; border: none; padding: 10px 16px; border-radius: 10px; }
+.ghost{ background: transparent; border:1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:10px; color:var(--muted); }
+.danger{ background: linear-gradient(180deg,var(--danger),#b91c1c); }
+
+/* Panels and canvas now styled via CSS so theme can override */
+.heatmap-panel, .controls-panel, .authority-panel{ background: var(--card-bg); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.04); }
+.heatmap-canvas{ width:100%; height:150px; border-radius:6px; margin-top:8px; background: #0b0b0b; }
+.capture-video{ width:240px; height:160px; background:#000; }
+.camera-select{ padding:6px; border-radius:6px; background: rgba(255,255,255,0.02); color:inherit; border:1px solid rgba(255,255,255,0.04); }
+.alerts-list, .public-alerts{ max-height:240px; overflow:auto; padding:8px; border-radius:6px; background: rgba(0,0,0,0.03); }
+
+/* Light theme overrides for newly added classes */
+body[data-theme="light"] .heatmap-panel, body[data-theme="light"] .controls-panel, body[data-theme="light"] .authority-panel{ background: #ffffff !important; }
+body[data-theme="light"] .heatmap-canvas{ background: linear-gradient(90deg,#f3f6fb,#eef6ff); }
+body[data-theme="light"] .capture-video{ background: #f2f6fb; }
+body[data-theme="light"] .alerts-list, body[data-theme="light"] .public-alerts{ background: rgba(10,20,40,0.02); }
+
+
+.header-stats {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.stat {
+  background: rgba(255,255,255,0.06);
+  padding: 6px 12px;
+  border-radius: 999px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.25);
+}
+/* header-stats removed from markup; keeping styles in case needed elsewhere */
+
+/* style the small link in the header to look like a compact button */
+.actions .ghost.header-link{ padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); color: #e6f3ff; text-decoration:none; display:inline-block; }
+.actions .ghost.header-link:hover{ background: rgba(255,255,255,0.04); transform: translateY(-2px); }
+
+.hero {
+  padding: 28px 0;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.primary {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+}
+
+.danger {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+}
+
+/* Button hover/focus/active states + transitions */
+.primary, .danger, .ghost {
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease, opacity .12s ease;
+  cursor: pointer;
+}
+
+.primary:hover{ transform: translateY(-3px); box-shadow: 0 10px 30px rgba(37,99,235,0.18); }
+.primary:active{ transform: translateY(-1px); box-shadow: 0 6px 18px rgba(37,99,235,0.12); }
+.primary:focus{ outline: 3px solid rgba(59,130,246,0.16); outline-offset: 3px; }
+
+.danger:hover{ transform: translateY(-3px); box-shadow: 0 10px 30px rgba(220,38,38,0.18); }
+.danger:active{ transform: translateY(-1px); box-shadow: 0 6px 18px rgba(220,38,38,0.12); }
+.danger:focus{ outline: 3px solid rgba(220,38,38,0.12); outline-offset: 3px; }
+
+.ghost{ background: transparent; border:1px solid rgba(255,255,255,0.06); padding:8px 10px; border-radius:8px; color:var(--muted); }
+.ghost:hover{ background: rgba(255,255,255,0.03); transform: translateY(-2px); }
+.ghost:active{ transform: translateY(0); }
+.ghost:focus{ outline: 3px solid rgba(255,255,255,0.06); outline-offset: 3px; }
+
+/* Make buttons more visible on dark background by slightly increasing saturation */
+button[disabled]{ opacity: 0.6; cursor: not-allowed; }
+
+/* Improve card/button contrast on hover */
+.card button, .dash-card{ transition: transform .14s ease, box-shadow .14s ease, background-color .14s ease; }
+.dash-card:hover{ transform: translateY(-6px); box-shadow: 0 12px 30px rgba(2,6,23,0.6); }
+
+.grid.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 16px;
+}
+
+/* Surveillance feed styles */
+.surveillance-feed{ padding:18px; }
+.surveillance-feed h2{ margin:0 0 12px 0; font-size:28px; }
+.feed-row{ display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap; }
+.feed-item{ text-align:center; flex:0 1 320px; min-width:260px; }
+.surv-thumb{
+  width:100%;
+  max-width:360px;
+  aspect-ratio: 16/9;
+  display:block;
+  object-fit: cover;
+  border-radius:6px;
+  box-shadow: 0 8px 24px rgba(2,6,23,0.15);
+}
+.feed-label{ margin-top:10px; font-weight:700; font-size:18px }
+.feed-actions{ margin-top:16px; display:flex; flex-direction:column; gap:12px; max-width:220px }
+
+
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.alert.active {
+  border-left: 4px solid #dc2626;
+  background: rgba(220,38,38,0.1);
+}
+
+.admin {
+  margin-top: 24px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 12px;
+}
+
+.dash-card {
+  background: rgba(255,255,255,0.04);
+  padding: 14px;
+  border-radius: 10px;
+}
+
+/* Capture UI */
+.capture-ui{ margin-top:14px; padding:12px; border-radius:10px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); }
+.capture-controls{ display:flex; gap:12px; align-items:center; }
+.capture-actions{ display:flex; flex-direction:column; gap:8px; }
+.thumbs{ margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; }
+.thumbs img{ width:120px; height:80px; object-fit:cover; border-radius:6px; border:1px solid rgba(255,255,255,0.04); }
+.ghost{ background:transparent; border:1px solid rgba(255,255,255,0.06); padding:8px 10px; border-radius:8px; color:var(--muted); }
+
+.camera-status{ margin-top:10px; font-size:13px; color:var(--muted); background: rgba(255,255,255,0.01); padding:8px; border-radius:8px; border:1px dashed rgba(255,255,255,0.03); }
+.camera-status.error{ color:#ffd6d6; border-color: rgba(220,38,38,0.35); background: rgba(220,38,38,0.04); }
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Ensure the `hidden` attribute actually hides the modal (overrides author rules) */
+.modal[hidden] { display: none !important; }
+
+.modal-panel {
+  background: #111827;
+  padding: 20px;
+  border-radius: 10px;
+  width: 320px;
+}
+
+.site-footer {
+  margin-top: 32px;
+  padding: 16px;
+  text-align: center;
+  color: #9fb3d1;
+}
+
+/* Light theme overrides */
+/* Stronger light-theme overrides to make switching obvious */
+body[data-theme="light"]{
+  --muted: #42516a;
+  background: linear-gradient(135deg,#f6f9ff 0%, #eef6ff 100%) !important;
+  color: #0b1730 !important;
+}
+
+body[data-theme="light"] .site-header{ 
+  background: #ffffff !important; 
+  box-shadow: 0 6px 18px rgba(11,23,48,0.06) !important; 
+  border-bottom: 1px solid rgba(11,23,48,0.06) !important; 
+}
+
+body[data-theme="light"] .site-title{ color: #0b1730 !important; }
+body[data-theme="light"] .logo{ box-shadow: 0 6px 18px rgba(37,99,235,0.08) !important; }
+
+body[data-theme="light"] .card, body[data-theme="light"] .dash-card, body[data-theme="light"] .capture-ui{
+  background: #ffffff !important;
+  border-color: rgba(11,23,48,0.06) !important;
+  color: #0b1730 !important;
+}
+body[data-theme="light"] .tag, body[data-theme="light"] .site-footer, body[data-theme="light"] .camera-status{ color: #42516a !important; }
+body[data-theme="light"] .primary{ background: linear-gradient(180deg,#2563eb,#1e40af) !important; color:white !important; }
+body[data-theme="light"] .danger{ background: linear-gradient(180deg,#ef4444,#b91c1c) !important; color:white !important; }
+body[data-theme="light"] .ghost{ background: transparent !important; border-color: rgba(11,23,48,0.06) !important; color:#123 !important; }
+
+/* Ensure focus outlines visible in light theme */
+body[data-theme="light"] :focus{ outline-color: rgba(37,99,235,0.18); }
+
+/* Modal adjustments for light theme so text remains readable */
+body[data-theme="light"] .modal{ background: rgba(11,23,48,0.06); }
+body[data-theme="light"] .modal-panel{
+  background: #ffffff;
+  color: #0b1730;
+  box-shadow: 0 10px 30px rgba(11,23,48,0.12);
+}
+body[data-theme="light"] .modal-panel .primary{ color: white; }
