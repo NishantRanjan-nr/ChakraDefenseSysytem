@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chakra Defence System</title>
+  <meta name="description" content="AI-assisted surveillance and rapid alert system prototype">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <link rel="stylesheet" href="style.clean.css" />
+</head>
+
+<body class="authority-page" data-theme="light">
+<div class="app">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand">
+      <div class="logo" aria-hidden="false">
+        <img src="pic/Screenshot 2025-12-29 015729.png" alt="Chakra Defence System logo" class="site-logo" />
+      </div>
+      <div>
+        <h1 class="site-title">Chakra Defence System</h1>
+        <p class="tag">360° AI-assisted Surveillance & Public Safety</p>
+        <div class="meta">
+          <span class="badge">Prototype</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="ghost" href="user.html">User Section</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="hero">
+  <h2>Real-time monitoring for safer public spaces</h2>
+  <p>Controlled entry, AI-assisted surveillance, and rapid alerting to authorities.</p>
+
+  <div class="hero-cta">
+    <button class="primary" onclick="scanQR()">Simulate QR Entry</button>
+    <button class="danger" onclick="detectMisbehavior()">Simulate AI Detection</button>
+  </div>
+</section>
+
+<section class="grid cards">
+  <div class="card">
+    <h3>QR Entry Status</h3>
+    <p id="qrStatus">Waiting for verification…</p>
+  </div>
+
+  <div class="card">
+    <h3>Crowd Density</h3>
+    <p id="crowd">Moderate</p>
+  </div>
+
+  <div id="alertCard" class="card alert">
+    <h3>System Alerts</h3>
+    <p id="alertMsg">No active alerts</p>
+  </div>
+</section>
+
+
+
+<section id="admin" class="admin">
+  <h3>Authority Dashboard</h3>
+
+  <!-- chart removed per request -->
+
+    <div class="dashboard-grid">
+    <div id="tab-live" class="dash-card" data-target="livePanel">Live Surveillance Feed</div>
+    <div id="tab-heatmap" class="dash-card heatmap-card" data-target="heatmapPanel">Crowd Heatmap</div>
+    <div id="tab-controls" class="dash-card" data-target="controlsPanel">Emergency Controls</div>
+    <div id="tab-authority" class="dash-card" data-target="authorityPanel">Authority Alerts</div>
+  </div>
+
+  <div id="adminPanels" class="admin-controls" style="margin-top:16px;display:grid;grid-template-columns:1fr 320px;gap:12px;align-items:start">
+    <div id="heatmapPanel" class="heatmap-panel" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h4 style="margin:0">Crowd Heatmap</h4>
+        <div style="font-size:12px;color:var(--muted)" id="heatmapDensityLabel">Density: Moderate</div>
+      </div>
+      <canvas id="heatmapCanvas" width="640" height="240" class="heatmap-canvas" ></canvas>
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+        <button id="refreshHeatmap" class="ghost">Refresh</button>
+        <label style="font-size:13px;margin-left:8px">Simulate:</label>
+        <select id="heatmapPreset" style="padding:6px;border-radius:6px">
+          <option value="low">Low</option>
+          <option value="moderate" selected>Moderate</option>
+          <option value="high">High</option>
+          <option value="critical">Critical</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="controlsPanel" class="controls-panel" style="display:none;">
+      <h4 style="margin-top:0">Emergency & Authority Controls</h4>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button id="triggerAlarm" class="danger">Trigger Alarm</button>
+        <button id="toggleLockdown" class="primary">Toggle Lockdown</button>
+        <button id="sendAuthorityAlert" class="primary">Send Authority Alert</button>
+        <button id="clearAlerts" class="ghost">Clear Alerts</button>
+      </div>
+      <div id="controlStatus" style="margin-top:12px;font-size:13px;color:var(--muted)">Status: Idle</div>
+    </div>
+  </div>
+
+  <!-- Capture UI removed per request -->
+
+  <div id="authorityPanel" style="display:none;margin-top:14px;" class="authority-panel">
+    <h4>Authority Alerts</h4>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Recent alerts and actions</div>
+    <div id="alertsList" class="alerts-list"></div>
+    <div style="margin-top:8px;display:flex;gap:8px">
+      <button id="resolveSelected" class="primary">Resolve Selected</button>
+      <button id="refreshAlerts" class="ghost">Refresh</button>
+    </div>
+  </div>
+
+</section>
+
+<!-- Live surveillance feed section added (moved below admin) -->
+<section class="surveillance-feed card" style="margin-top:18px;">
+  <h2>Live Surveillance Feed</h2>
+
+  <div class="feed-row">
+    <div class="feed-item">
+      <img class="surv-thumb" src="pic/0b2db45a-37f9-4578-95d4-0e91a1b27e21.png" alt="camera 1">
+      <div class="feed-label">camera 1</div>
+    </div>
+
+    <div class="feed-item">
+      <img class="surv-thumb" src="pic/474badaf-255d-402f-942c-3bb4321b1660.png" alt="camera 2">
+      <div class="feed-label">camera 2</div>
+    </div>
+
+    <div class="feed-item">
+      <img class="surv-thumb" src="pic/Screenshot 2025-12-29 021016.png" alt="camera 3">
+      <div class="feed-label">camera 3</div>
+    </div>
+  </div>
+
+  <div class="feed-actions">
+    <button id="captureFrameBtn" class="primary">capture frame</button>
+    <button id="uploadServerBtn" class="primary">upload to server</button>
+  </div>
+</section>
+
+</main>
+
+<div id="alertModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" hidden>
+  <div class="modal-panel" tabindex="-1">
+    <h4 id="alertTitle">Authority Alert</h4>
+    <p id="alertDetails">Alert details will appear here.</p>
+    <div class="modal-actions">
+      <button id="dismissAlert" class="primary">Dismiss</button>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">Team BadBugs — Chakra Defence System</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
